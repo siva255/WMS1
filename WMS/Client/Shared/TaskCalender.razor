@@ -1,0 +1,91 @@
+﻿@using WMS.Client.DataLayer
+@inject CalenderService calenderservice
+
+<div class="taskCalendar">
+    <div class="leftArrow">
+        <button class="arrowBtn" title="Prev">
+            <span class="material-icons">
+                skip_previous
+            </span>
+        </button>
+    </div>
+    <ul class="taskCalendarList">
+        @if (calenderservice == null)
+        {
+            <p><em>Loading.....</em></p>
+        }
+        else
+        { 
+            @foreach (var cl in calenderlist)
+            {
+
+                <li>
+                    <div class="taskCalendarInner">
+                        <h3 class="dayName">@cl.dayName</h3>
+                        <span class="monthName">@cl.monthName</span>
+                        <h4 class="taskCount">@cl.taskCount</h4>
+                    </div>
+                </li>
+            }
+    }
+
+    </ul>
+    <div class="rightArrow">
+        <button class="arrowBtn" title="Next">
+            <span class="material-icons">
+                skip_next
+            </span>
+        </button>
+
+    </div>
+</div>
+
+
+
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool expandSubNav;
+    private int ClickedMenu = 0;
+    private bool hasPageName = true;
+    private int prevMenuClickedMenu = 0;
+
+    public IEnumerable<CalenderInfo> calenderlist;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        if (hasPageName)
+        {
+            collapseNavMenu = !collapseNavMenu;
+        }
+
+    }
+    public void GetIsClicked(MenuInfo mn)
+    {
+        ClickedMenu = mn.MenuId;
+        if (prevMenuClickedMenu != ClickedMenu)
+        {
+            expandSubNav = false;
+            if (mn.PageName !="" || mn.MenuName =="My Bin")
+            {
+                hasPageName = true;
+            }
+            else
+            {
+                expandSubNav = !expandSubNav;
+                hasPageName = false;
+            }
+        }
+        else
+        {
+            expandSubNav = !expandSubNav;
+        }
+        prevMenuClickedMenu = ClickedMenu;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        calenderlist = await calenderservice.GetCalenderInfos();
+    }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "menuId": 1,
+    "parentMenuId": 0,
+    "pageName": "demo",
+    "menuName": "My Bin",
+    "iconName": ""
+  },
+  {
+    "menuId": 2,
+    "parentMenuId": 0,
+    "pageName": "Report",
+    "menuName": "Reports",
+    "iconName": ""
+  },
+  {
+    "menuId": 3,
+    "parentMenuId": 1,
+    "pageName": "Dashboard",
+    "menuName": "Dashboard",
+    "iconName": ""
+  },
+  {
+    "menuId": 4,
+    "parentMenuId": 1,
+    "pageName": "mytask",
+    "menuName": "My Tasks",
+    "iconName": ""
+  },
+  {
+    "menuId": 5,
+    "parentMenuId": 2,
+    "pageName": "reportsx",
+    "menuName": "Report X",
+    "iconName": ""
+  }
+
+]

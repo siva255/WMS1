@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "dayName": "Mon",
+    "monthName": "Jan",
+    "taskCount": "10"
+  },
+  {
+    "id": 2,
+    "dayName": "Tue",
+    "monthName": "Jan",
+    "taskCount": "11"
+  },
+  {
+    "id": 3,
+    "dayName": "wed",
+    "monthName": "Jan",
+    "taskCount": "12"
+  },
+  {
+    "id": 4,
+    "dayName": "Thu",
+    "monthName": "Jan",
+    "taskCount": "13"
+  },
+  {
+    "id": 5,
+    "dayName": "Fri",
+    "monthName": "Jan",
+    "taskCount": "14"
+  },
+  {
+    "id": 6,
+    "dayName": "Sat",
+    "monthName": "Jan",
+    "taskCount": "15"
+  },
+  {
+    "id": 7,
+    "dayName": "Sun",
+    "monthName": "Jan",
+    "taskCount": "16"
+  }
+
+]

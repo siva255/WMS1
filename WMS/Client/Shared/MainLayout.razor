@@ -1,0 +1,65 @@
+﻿@inherits LayoutComponentBase
+
+
+@*<div class="sidebar">
+            <NavMenu />
+        </div>
+
+    <div class="main">
+            <div class="top-row px-4">
+                <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>*@
+@*<button id="siva123">submit</button>*@
+<div class="container-fuild">
+    <header style="display:flex">
+        <div class="headerLeft">
+            <h1 class="headerTitle">aiKira<span class="headersubTitle">Publishing Platfrom</span></h1>
+        </div>
+        <div class="headerRight">
+            <ul>
+                <li>
+                    <span class="material-icons">
+                        error_outline
+                    </span>
+                </li>
+                <li>
+                    <span class="material-icons-outlined">
+                        notification_important
+                    </span>
+                </li>
+                <li>
+                    <div class="userName">m</div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="taskPageInner">
+        <div class="leftsideBar">
+            <div class="searchArea">
+                <span class="material-icons">
+                    search
+                </span>
+
+                <input type="text" class="searchInput" placeholder="Search menu">
+            </div>
+            @* Left side NavMenu *@
+          <WMSCustomNavMenu></WMSCustomNavMenu>
+        </div>
+        <div class="rightSideBar">
+            @* upper menu  Component *@
+           <UpperMenu></UpperMenu>
+            <div class="rightSideBarInner">
+                @Body
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
