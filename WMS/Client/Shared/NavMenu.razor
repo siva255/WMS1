@@ -1,73 +1,92 @@
-﻿
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">WMS</a>
+﻿@using WMS.Client.DataLayer
+@inject MenuService MenuService
+@*<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">BlazorCrud</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
-</div>
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="My Bin" @onclick="()=>expandSubMenu= !expandSubMenu">
-                <span class="material-icons treeListIcons" aria-hidden="true"></span> My Bin
-            </NavLink>
-            @if (expandSubMenu)
-            {
-                <ul class="nav flex-column">
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="My Bin/Dashbord">
-                            <span class="oi oi-dashboard" aria-hidden="true"></span> Dashbord
-                        </NavLink>
-                    </li>
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="My Bin/My Tasks">
-                            <span class="oi oi-task" aria-hidden="true"></span> My Tasks
-                        </NavLink>
-                    </li>
-                </ul>
+</div>*@
 
-
-            }
-        </li>
-
-
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Report" @onclick="()=>expandSubMenu1= !expandSubMenu1">
-                <span class="oi oi-signal" aria-hidden="true"></span> Reports
-            </NavLink>
-            @if (expandSubMenu1)
-            {
-                <ul class="nav flex-column">
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="Report/Report x">
-                            <span class="oi oi-file" aria-hidden="true"></span> Report x
-                        </NavLink>
-                    </li>
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="Report/Report y">
-                            <span class="oi oi-signal" aria-hidden="true"></span> Report y
-                        </NavLink>
-                    </li>
-                </ul>
-
-            }
-        </li>
-
-
-
-    </ul>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-    private bool expandSubMenu;//add
-    private bool expandSubMenu1;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+<div class="menuListArea">
+    @if (menuList == null)
     {
-        collapseNavMenu = !collapseNavMenu;
+        <p><em>Loading.....</em></p>
     }
+    else
+    {
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+       
+        <ul class="menuListInner">
+            @foreach (var mn in menuList)
+            {
+                @if (mn.ParentMenuId == 0)
+                {
+            
+                <li class="nav flex-column">
+                    @*<NavLink class="menuText parentNode" href="@mn.PageName" Match="NavLinkMatch.All" style=" text-decoration: none;">
+                <span class="material-icons treeListIcons" aria-hidden="true"></span> @mn.MenuName
+            </NavLink>*@
+                    <div class="@NavMenuCssClass menuText parentNode" href="@mn.PageName" @onclick="()=>expandSubMenu= !expandSubMenu">
+                        <span class="material-icons treeListIcons" aria-hidden="true"></span> @mn.MenuName
+                    </div>
+                    @if (expandSubMenu)
+                    {
+                        <ul class="childNode">
+                            @foreach (var mn1 in menuList)
+                            {
+                                @if (mn.MenuId == mn1.ParentMenuId)
+                                {
+                                    <li class="nav-item px-3">
+                                        <NavLink class="menuText" href="@mn1.PageName" Match="NavLinkMatch.All">
+                                            <span class="listCount"></span>@mn1.MenuName
+                                        </NavLink>
+                                    </li>
+                                }
+                            }
+                        </ul>
 
-}
+
+                    }
+
+
+                </li>
+            
+                }
+           
+                }
+           
+                </ul>
+        </nav>
+
+
+        }
+    </div>
+
+    @code {
+
+        private bool expandSubMenu = false;
+        private bool hasPageName = true;
+        public IEnumerable<MenuInfo> menuList;
+        bool collapseNavMenu = true;
+
+        private bool expandSubNavSettings;
+
+
+        string baseMenuClass = "navbar-collapse d-sm-inline-flex flex-sm-row-reverse";
+
+        string NavMenuCssClass => baseMenuClass + (collapseNavMenu ? " collapse" : "");
+
+        //private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+        private void ToggleNavMenu()
+        {
+            if (hasPageName)
+            {
+                collapseNavMenu = !collapseNavMenu;
+            }
+        }
+        protected override async Task OnInitializedAsync()
+        {
+            menuList = await MenuService.GetMenuData();
+        }
+    }

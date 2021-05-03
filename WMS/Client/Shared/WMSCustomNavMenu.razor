@@ -1,7 +1,7 @@
 ﻿@using WMS.Client.DataLayer
 @inject MenuService MenuService
 
-<div class="menuListArea">
+@*<div class="menuListArea">
     @if (menuList==null)
     {
         <p><em>Loading.....</em></p>
@@ -14,7 +14,7 @@
                         @if (mn.ParentMenuId==0)
                         {
                     <li class="treeList">
-                        <div Class="menuText parentNode" href="@mn.PageName" @onclick="()=>GetIsClicked(mn)">
+                        <div Class="menuText parentNode" href="@mn.PageName" >
                             <span class="material-icons treeListIcons" aria-hidden="true"></span>@mn.MenuName
                         </div>
                         <ul class="childNode">
@@ -22,15 +22,14 @@
                             {
                                 @if (mn.MenuId == mn1.ParentMenuId)
                                 {
-                                    @if (expandSubNav && mn.MenuId == ClickedMenu)
-                                    {
-                            <li>
-                                <div Class="menuText" href="@mn1.PageName" @onclick="()=>GetIsClicked(mn1)">
-                                    <span class="listCount" aria-hidden="true"></span>@mn1.MenuName
-                                </div>
-                            </li>
+
+                                    <li>
+                                        <div Class="menuText" href="@mn1.PageName" >
+                                            <span class="listCount" aria-hidden="true"></span>@mn1.MenuName
+                                        </div>
+                                    </li>
                             <li class="menuActive"></li>
-                                    }
+                                    
                                 }
                             }
                         </ul>
@@ -87,5 +86,5 @@
     protected override async Task OnInitializedAsync()
     {
         menuList = await MenuService.GetMenuData();
-    }
-}
+    }*@
+<!--}-->

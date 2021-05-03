@@ -95,28 +95,7 @@
         }
 
     }
-    public void GetIsClicked(MenuInfo mn)
-    {
-        ClickedMenu = mn.MenuId;
-        if (prevMenuClickedMenu != ClickedMenu)
-        {
-            expandSubNav = false;
-            if (mn.PageName != "" || mn.MenuName == "Home")
-            {
-                hasPageName = true;
-            }
-            else
-            {
-                expandSubNav = !expandSubNav;
-                hasPageName = false;
-            }
-        }
-        else
-        {
-            expandSubNav = !expandSubNav;
-        }
-        prevMenuClickedMenu = ClickedMenu;
-    }
+
     protected override async Task OnInitializedAsync()
     {
         innerList = await innerService.GetInnerTaskInfos();

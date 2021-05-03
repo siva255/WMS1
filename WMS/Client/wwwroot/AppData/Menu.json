@@ -2,21 +2,14 @@
   {
     "menuId": 1,
     "parentMenuId": 0,
-    "pageName": "demo",
+    "pageName": "mybin",
     "menuName": "My Bin",
-    "iconName": ""
-  },
-  {
-    "menuId": 2,
-    "parentMenuId": 0,
-    "pageName": "Report",
-    "menuName": "Reports",
     "iconName": ""
   },
   {
     "menuId": 3,
     "parentMenuId": 1,
-    "pageName": "Dashboard",
+    "pageName": "dashbord",
     "menuName": "Dashboard",
     "iconName": ""
   },
@@ -28,10 +21,25 @@
     "iconName": ""
   },
   {
+    "menuId": 2,
+    "parentMenuId": 0,
+    "pageName": "Report",
+    "menuName": "Reports",
+    "iconName": ""
+  },
+
+  {
     "menuId": 5,
     "parentMenuId": 2,
-    "pageName": "reportsx",
+    "pageName": "mytask",
     "menuName": "Report X",
+    "iconName": ""
+  },
+  {
+    "menuId": 6,
+    "parentMenuId": 2,
+    "pageName": "mytask",
+    "menuName": "Report y",
     "iconName": ""
   }
 
