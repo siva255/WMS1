@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "slno": 1,
+    "chaptername": "Chapter Name",
+    "duedate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  {
+    "id": 1,
+    "slno": 2,
+    "chaptername": "Chapter Name",
+    "duedate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  {
+    "id": 2,
+    "slno": 3,
+    "chaptername": "Chapter Name",
+    "duedate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  {
+    "id": 3,
+    "slno": 4,
+    "chaptername": "Chapter Name",
+    "duedate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  {
+    "id": 4,
+    "slno": 5,
+    "chaptername": "Chapter Name",
+    "duedate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  {
+    "id": 5,
+    "slno": 6,
+    "chaptername": "Chapter Name",
+    "duedate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  }
+]

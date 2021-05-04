@@ -1,28 +1,33 @@
 ﻿@using WMS.Client.DataLayer
-@inject UpperMenuService uppermenuservice
+@inject TabRightTimeService TimeService
 @inject IJSRuntime JS;
 
-
-<ul class="taskTabHeader">
-    @if (uppermenuservice == null)
-    {
-        <p><em>Loading.....</em></p>
-    }
-    else
-    {
-        @foreach (var up1 in uppermenulist)
-        {
-            <li style="padding:7px;">
-                <a class="" Tabid="@up1.Tabid" style="text-decoration: none;color: #212529" href="@up1.PageName">
-                    <p>@up1.TabName </p>
-                </a>
-            </li>
-
-        }
-    }
-
-</ul>
-
+<div class="taskTimeArea">
+    <div class="taskTimeAreainner">
+        <div class="taskTimeAreainnerLeft">
+            Start Time
+        </div>
+        <div class="taskTimeAreainnerRight">
+            <span>6:88 am</span>, Tuesday
+        </div>
+    </div>
+    <div class="taskTimeAreainner">
+        <div class="taskTimeAreainnerLeft">
+            Exstimated TAT
+        </div>
+        <div class="taskTimeAreainnerRight">
+            <span>8:88 am</span>, Tuesday[2 Hrs]
+        </div>
+    </div>
+    <div class="taskTimeAreainner">
+        <div class="taskTimeAreainnerLeft">
+            Due in
+        </div>
+        <div class="taskTimeAreainnerRight">
+            1 Hr 55 Mins
+        </div>
+    </div>
+</div>
 
 
 
@@ -34,7 +39,7 @@
     private bool hasPageName = true;
     private int prevMenuClickedMenu = 0;
 
-    public IEnumerable<UpperMenuInfo> uppermenulist;
+    public IEnumerable<TabRightTimeInfo> RightTimeList;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -52,7 +57,7 @@
         if (prevMenuClickedMenu != ClickedMenu)
         {
             expandSubNav = false;
-            if (mn.PageName != "" || mn.MenuName == "Home")
+            if (mn.PageName != "" || mn.MenuName == "My Bin")
             {
                 hasPageName = true;
             }
@@ -70,6 +75,6 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        uppermenulist = await uppermenuservice.GetUpperMenuInfos();
+        RightTimeList = await TimeService.GetTabRightTimeInfos();
     }
 }

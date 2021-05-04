@@ -1,4 +1,5 @@
 ﻿@page "/mytask"
+@inject IJSRuntime JS;
 
 <div class="tabBodyInner tabShow" id="MyTasks">
     <div class="viewPortArea gridView">
@@ -34,8 +35,19 @@
             </div>
             @* Task Calender Component *@
             <TaskCalender></TaskCalender>
-            <InnerTask></InnerTask>
+            <div id="boxes">
 
+
+                <div id="leftbox">
+                    <InnerTask></InnerTask>
+                </div>
+
+                <div id="rightbox"  style="padding-left: 20px;padding-right: 20px">
+                    <Tabrighthead></Tabrighthead>
+                    @*<TabRightTime></TabRightTime>*@
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -49,7 +61,7 @@
     private bool hasPageName = true;
     private int prevMenuClickedMenu = 0;
 
-   
+
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -61,6 +73,6 @@
         }
 
     }
-    
-   
+
+
 }

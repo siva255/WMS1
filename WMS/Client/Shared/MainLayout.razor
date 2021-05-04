@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
-
+@inject IJSRuntime JS;
 
 @*<div class="sidebar">
             <NavMenu />
@@ -50,24 +49,30 @@
                 <input type="text" class="searchInput" placeholder="Search menu">
             </div>
             @* Left side NavMenu *@
-        @*<div class="sidebar">
-            <NavMenu />
-        </div>*@
-          <NavMenu></NavMenu>
-            
+            @*<div class="sidebar">
+                    <NavMenu />
+                </div>*@
+            <NavMenu></NavMenu>
+
             @*  <WMSCustomNavMenu></WMSCustomNavMenu>*@
         </div>
         <div class="rightSideBar">
             @* upper menu  Component *@
-           <UpperMenu></UpperMenu>
+            <UpperMenu></UpperMenu>
             <div class="rightSideBarInner">
-                <div class="content px-4">
+
+
                 @Body
-            </div>
+
             </div>
         </div>
     </div>
 
 
 </div>
+<footer>
+    <div class="sidebarFooter">
+        <p>2021 SPI Gobal. All Rights Reserved.</p>
+    </div>
+</footer>
 

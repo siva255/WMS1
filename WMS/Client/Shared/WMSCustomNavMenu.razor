@@ -1,90 +1,90 @@
 ﻿@using WMS.Client.DataLayer
 @inject MenuService MenuService
-
+@inject IJSRuntime JS;
 @*<div class="menuListArea">
-    @if (menuList==null)
-    {
-        <p><em>Loading.....</em></p>
-    }
-            else
-            {
-                <ul class="menuListInner">
-                    @foreach (var mn in menuList)
-                    {
-                        @if (mn.ParentMenuId==0)
+        @if (menuList==null)
+        {
+            <p><em>Loading.....</em></p>
+        }
+                else
+                {
+                    <ul class="menuListInner">
+                        @foreach (var mn in menuList)
                         {
-                    <li class="treeList">
-                        <div Class="menuText parentNode" href="@mn.PageName" >
-                            <span class="material-icons treeListIcons" aria-hidden="true"></span>@mn.MenuName
-                        </div>
-                        <ul class="childNode">
-                            @foreach (var mn1 in menuList)
+                            @if (mn.ParentMenuId==0)
                             {
-                                @if (mn.MenuId == mn1.ParentMenuId)
+                        <li class="treeList">
+                            <div Class="menuText parentNode" href="@mn.PageName" >
+                                <span class="material-icons treeListIcons" aria-hidden="true"></span>@mn.MenuName
+                            </div>
+                            <ul class="childNode">
+                                @foreach (var mn1 in menuList)
                                 {
+                                    @if (mn.MenuId == mn1.ParentMenuId)
+                                    {
 
-                                    <li>
-                                        <div Class="menuText" href="@mn1.PageName" >
-                                            <span class="listCount" aria-hidden="true"></span>@mn1.MenuName
-                                        </div>
-                                    </li>
-                            <li class="menuActive"></li>
-                                    
+                                        <li>
+                                            <div Class="menuText" href="@mn1.PageName" >
+                                                <span class="listCount" aria-hidden="true"></span>@mn1.MenuName
+                                            </div>
+                                        </li>
+                                <li class="menuActive"></li>
+
+                                    }
                                 }
+                            </ul>
+                        </li>
                             }
-                        </ul>
-                    </li>
                         }
-                    }
 
-                </ul>
+                    </ul>
+                }
+
+    </div>
+
+    @code {
+        private bool collapseNavMenu = true;
+        private bool expandSubNav;
+        private int ClickedMenu = 0;
+        private bool hasPageName = true;
+        private int prevMenuClickedMenu = 0;
+
+        public IEnumerable<MenuInfo> menuList;
+
+        private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+        private void ToggleNavMenu()
+        {
+            if (hasPageName)
+            {
+                collapseNavMenu = !collapseNavMenu;
             }
 
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-    private bool expandSubNav;
-    private int ClickedMenu = 0;
-    private bool hasPageName = true;
-    private int prevMenuClickedMenu = 0;
-
-    public IEnumerable<MenuInfo> menuList;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        if (hasPageName)
-        {
-            collapseNavMenu = !collapseNavMenu;
         }
-
-    }
-    public void GetIsClicked(MenuInfo mn)
-    {
-        ClickedMenu = mn.MenuId;
-        if (prevMenuClickedMenu != ClickedMenu)
+        public void GetIsClicked(MenuInfo mn)
         {
-            expandSubNav = false;
-            if (mn.PageName !="" || mn.MenuName =="Home")
+            ClickedMenu = mn.MenuId;
+            if (prevMenuClickedMenu != ClickedMenu)
             {
-                hasPageName = true;
+                expandSubNav = false;
+                if (mn.PageName !="" || mn.MenuName =="Home")
+                {
+                    hasPageName = true;
+                }
+                else
+                {
+                    expandSubNav = !expandSubNav;
+                    hasPageName = false;
+                }
             }
             else
             {
                 expandSubNav = !expandSubNav;
-                hasPageName = false;
             }
+            prevMenuClickedMenu = ClickedMenu;
         }
-        else
+        protected override async Task OnInitializedAsync()
         {
-            expandSubNav = !expandSubNav;
-        }
-        prevMenuClickedMenu = ClickedMenu;
-    }
-    protected override async Task OnInitializedAsync()
-    {
-        menuList = await MenuService.GetMenuData();
-    }*@
+            menuList = await MenuService.GetMenuData();
+        }*@
 <!--}-->

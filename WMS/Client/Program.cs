@@ -23,6 +23,9 @@ namespace WMS.Client
             builder.Services.AddSingleton<CalenderService>();
             builder.Services.AddSingleton<UpperMenuService>();
             builder.Services.AddSingleton<InnerTaskService>();
+            builder.Services.AddSingleton<TabheadrightService>();
+            builder.Services.AddSingleton<TabRightTimeService>();
+            builder.Services.AddSingleton<TaskdatatableService>();
             await builder.Build().RunAsync();
         }
     }

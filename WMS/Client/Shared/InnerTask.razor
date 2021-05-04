@@ -1,5 +1,6 @@
 ﻿@using WMS.Client.DataLayer
 @inject InnerTaskService innerService
+@inject IJSRuntime JS;
 
 
 <div class="taskListArea">
@@ -22,11 +23,11 @@
                     <div class="groupTaskInner active">
                         <div class="row groupTaskInnerBox">
                             <div class="col-lg-2 taskAreaListBox">
-                                <div class="taskAreaListInner riskTask active">
+                                <div class="taskAreaListInner riskTask active" style="width:400px">
                                     <div class="taskInnerHead">
                                         <div class="taskInnerHeadLeft">
                                             <label class="checkBoxLabel">
-                                               @in1.Checkboxname
+                                                @in1.Checkboxname
                                                 <input type="checkbox" checked="checked" id="@in1.CheckboxId">
                                                 <span class="checkBoxMark"></span>
                                             </label>
@@ -47,10 +48,10 @@
                                         </div>
                                     </div>
                                     <div class="taskInnerContent">
-                                        <h2>
+                                        <h2 style="overflow:unset">
                                             @in1.projectdescrptionc1
                                         </h2>
-                                        <p>
+                                        <p style="overflow:unset">
                                             @in1.projectdescrptionc2
                                         </p>
                                     </div>

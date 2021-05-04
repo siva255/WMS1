@@ -1,5 +1,6 @@
 ﻿@using WMS.Client.DataLayer
 @inject CalenderService calenderservice
+@inject IJSRuntime JS;
 
 <div class="taskCalendar">
     <div class="leftArrow">
@@ -15,7 +16,7 @@
             <p><em>Loading.....</em></p>
         }
         else
-        { 
+        {
             @foreach (var cl in calenderlist)
             {
 
@@ -27,7 +28,7 @@
                     </div>
                 </li>
             }
-    }
+        }
 
     </ul>
     <div class="rightArrow">
@@ -68,7 +69,7 @@
         if (prevMenuClickedMenu != ClickedMenu)
         {
             expandSubNav = false;
-            if (mn.PageName !="" || mn.MenuName =="My Bin")
+            if (mn.PageName != "" || mn.MenuName == "My Bin")
             {
                 hasPageName = true;
             }
