@@ -26,6 +26,8 @@ namespace WMS.Client
             builder.Services.AddSingleton<TabheadrightService>();
             builder.Services.AddSingleton<TabRightTimeService>();
             builder.Services.AddSingleton<TaskdatatableService>();
+            builder.Services.AddSingleton<FooterIndexService>();
+            builder.Services.AddSingleton<ValueShare>();
             await builder.Build().RunAsync();
         }
     }

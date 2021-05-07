@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "tabid": "files",
+    "tabName": "Files",
+    "pageName": "files"
+  },
+  {
+    "id": 2,
+    "tabid": "filehistory",
+    "tabName": "File History",
+    "pageName": "filehistory"
+  },
+  {
+    "id": 3,
+    "tabid": "property",
+    "tabName": "Property",
+    "pageName": "property"
+  },
+  {
+    "id": 4,
+    "tabid": "instruction",
+    "tabName": "Instruction",
+    "pageName": "instruction"
+  }
+
+]

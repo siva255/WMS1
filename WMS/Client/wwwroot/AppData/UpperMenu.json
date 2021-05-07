@@ -8,13 +8,13 @@
   {
     "id": 2,
     "Tabid": "Dashbord",
-    "TabName": "Dashbord ",
-    "PageName": "dashbord2"
+    "TabName": "Dashboard ",
+    "PageName": "dashboard"
   },
   {
     "id": 3,
     "Tabid": "Report",
     "TabName": "Report ",
-    "PageName": "report3"
+    "PageName": "Report"
   }
 ]

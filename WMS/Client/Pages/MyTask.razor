@@ -1,5 +1,12 @@
-﻿@page "/mytask"
+﻿@using WMS.Client.DataLayer
+@page "/mytask"
+@inject WMS.Client.ValueShare clsvalueshare
+@inject InnerTaskService innerService
+@using Microsoft.JSInterop
 @inject IJSRuntime JS;
+@using System.Reflection
+
+
 
 <div class="tabBodyInner tabShow" id="MyTasks">
     <div class="viewPortArea gridView">
@@ -14,7 +21,7 @@
                         filter_list
                     </span>
                 </div>
-                <div class="viewPort">
+                <div class="viewPort" style="display:flex">
                     <ul class="viewPortList">
                         <li class="active">
                             <button class="gridView" title="Grid">
@@ -23,7 +30,7 @@
                                 </span>
                             </button>
                         </li>
-                        <li class="">
+                        <li class="list-group">
                             <button class="listView" title="List">
                                 <span class="material-icons">
                                     list
@@ -39,12 +46,80 @@
 
 
                 <div id="leftbox">
-                    <InnerTask></InnerTask>
+                    <div class="taskListArea" href="mytask/one" Match="NavLinkMatch.All">
+                        <div class="row taskAreaList">
+                            @if (innerService == null)
+                            {
+                                <p><em>Loading.....</em></p>
+                            }
+                            else
+                            {
+                                @foreach (var in1 in innerList)
+                                {
+                                    <div class="col-lg-12 groupTask">
+                                        <div class="groupTaskHead active">
+                                            <h2>@in1.ListName</h2>
+                                            <span class="material-icons">
+                                                expand_more
+                                            </span>
+                                        </div>
+                                        <div class="groupTaskInner active" @onclick="showright">
+                                            <div class="row groupTaskInnerBox">
+                                                <div class="col-lg-2 taskAreaListBox">
+                                                    <div class="taskAreaListInner riskTask active" style="width:400px">
+                                                        <div class="taskInnerHead">
+                                                            <div class="taskInnerHeadLeft">
+                                                                <label class="checkBoxLabel">
+                                                                    @in1.Checkboxname
+                                                                    <input type="checkbox" checked="checked" id="@in1.CheckboxId">
+                                                                    <span class="checkBoxMark"></span>
+                                                                </label>
+                                                                <span class="material-icons taskIcons taskRisk">
+                                                                    double_arrow
+                                                                </span>
+                                                            </div>
+                                                            <div class="taskInnerHeadright">
+                                                                <div class="markedArea">
+                                                                    <span class="material-icons-outlined">
+                                                                        grade
+                                                                    </span>
+                                                                    <span class="material-icons">
+                                                                        grade
+                                                                    </span>
+                                                                </div>
+                                                                <p>@in1.dateTime</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="taskInnerContent">
+                                                            <h2 style="overflow:unset">
+                                                                @in1.projectdescrptionc1
+                                                            </h2>
+                                                            <p style="overflow:unset">
+                                                                @in1.projectdescrptionc2
+                                                            </p>
+                                                        </div>
+                                                        <span class="stageMessage risk">@in1.stageactivity</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+
+
+
+                        </div>
+                    </div>
                 </div>
 
-                <div id="rightbox"  style="padding-left: 20px;padding-right: 20px">
-                    <Tabrighthead></Tabrighthead>
-                    @*<TabRightTime></TabRightTime>*@
+                <div id="rightbox" style="padding-left: 20px;padding-right: 20px">
+                    @if (RenderFragment != null)
+                        @RenderFragment
+
+                        @*<TabRightTime></TabRightTime>*@
                 </div>
 
             </div>
@@ -55,13 +130,15 @@
 
 
 @code {
+    //[Parameter]
+    //public string cname { get { return ""; } set { componentName = cname; } }
     private bool collapseNavMenu = true;
     private bool expandSubNav;
     private int ClickedMenu = 0;
     private bool hasPageName = true;
     private int prevMenuClickedMenu = 0;
 
-
+    public IEnumerable<InnerTaskInfo> innerList;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -72,6 +149,62 @@
             collapseNavMenu = !collapseNavMenu;
         }
 
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        innerList = await innerService.GetInnerTaskInfos();
+    }
+
+    [Parameter]
+    public string sampledemo { get; set; }
+
+
+
+    Type[] types => Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(ComponentBase)).ToArray();
+    Type selecteType;
+  
+    public RenderFragment RenderFragment;
+
+    private string _componentName;
+
+    public void showright()
+    {
+
+        componentName = "SecondpageRightDiv";
+
+    }
+    public void demo1()
+    {
+
+        componentName = "two";
+
+    }
+    protected void CallCSMethod()
+    {
+        componentName = "two";
+    }
+
+
+    [JSInvokable]
+    public void CSCallBackMethod()
+    {
+        componentName = "two";
+    }
+    public string componentName
+    {
+        get { return _componentName; }
+        set
+        {
+            _componentName = value;
+            selecteType = types.Where(type => type.Name != null && type.Name.ToUpper() == value.ToUpper())
+               .FirstOrDefault() ?? typeof(SurveyPrompt);
+            RenderFragment = (builder) =>
+            {
+                builder.OpenComponent(0, selecteType);
+                builder.CloseComponent();
+            };
+        }
     }
 
 

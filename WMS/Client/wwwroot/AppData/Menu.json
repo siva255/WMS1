@@ -31,14 +31,14 @@
   {
     "menuId": 5,
     "parentMenuId": 2,
-    "pageName": "mytask",
+    "pageName": "Report",
     "menuName": "Report X",
     "iconName": ""
   },
   {
     "menuId": 6,
     "parentMenuId": 2,
-    "pageName": "mytask",
+    "pageName": "Report",
     "menuName": "Report y",
     "iconName": ""
   }

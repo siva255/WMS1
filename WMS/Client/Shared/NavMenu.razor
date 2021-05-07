@@ -23,11 +23,11 @@
                     @if (mn.ParentMenuId == 0)
                     {
 
-                        <li class="nav flex-column">
+                        <li class="nav flex-column"style="text-decoration:none">
                             @*<NavLink class="menuText parentNode" href="@mn.PageName" Match="NavLinkMatch.All" style=" text-decoration: none;">
                                     <span class="material-icons treeListIcons" aria-hidden="true"></span> @mn.MenuName
                                 </NavLink>*@
-                            <div class="@NavMenuCssClass menuText parentNode" href="@mn.PageName" @onclick="()=>expandSubMenu= !expandSubMenu">
+                            <div class="@NavMenuCssClass menuText parentNode" href="@mn.PageName" @onclick="()=>expandSubMenu= !expandSubMenu"  >
                                 <span class="material-icons treeListIcons" aria-hidden="true"></span> @mn.MenuName
                             </div>
                             @if (expandSubMenu)
@@ -70,7 +70,6 @@
     public IEnumerable<MenuInfo> menuList;
     bool collapseNavMenu = true;
 
-    private bool expandSubNavSettings;
 
 
     string baseMenuClass = "navbar-collapse d-sm-inline-flex flex-sm-row-reverse";

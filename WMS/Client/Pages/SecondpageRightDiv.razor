@@ -1,34 +1,22 @@
-﻿@page "/"
-@inject NavigationManager NavManager
-@inject IJSRuntime JS;
+﻿@page "/secondpagediv"
 @using System.Reflection
 
+<Tabrighthead></Tabrighthead>
 
-<input class="form-check form-control col-5"  @bind="componentName" @bind:event="oninput"/>
-@*<button @onclick="demo">siva</button>*@
-
-@RenderFragment
-
-@code{
+@code {
     Type[] types => Assembly.GetExecutingAssembly().GetTypes().Where(type => type.BaseType == typeof(ComponentBase)).ToArray();
     Type selecteType;
     RenderFragment RenderFragment;
 
-    //public void demo()
-    //{
-    //    componentName = "secondpagediv";
-    //}
-
     private string _componentName;
-
     public string componentName
     {
         get { return _componentName; }
         set
         {
             _componentName = value;
-            selecteType = types.Where(type => type.Name.ToUpper() == value.ToUpper())
-                .FirstOrDefault() ?? typeof(SurveyPrompt);
+            selecteType = types.Where(type => type.Name != null && type.Name.ToUpper() == value.ToUpper())
+               .FirstOrDefault() ?? typeof(SurveyPrompt);
             RenderFragment = (builder) =>
             {
                 builder.OpenComponent(0, selecteType);
@@ -36,5 +24,4 @@
             };
         }
     }
-
 }

@@ -1,0 +1,89 @@
+﻿@using WMS.Client.DataLayer
+@inject FooterIndexService footerservice
+@inject IJSRuntime JS;
+
+@*<ul class="taskTabHeader">
+    @if (uppermenuservice == null)
+    {
+        <p><em>Loading.....</em></p>
+    }
+    else
+    {
+        @foreach (var up1 in uppermenulist)
+        {
+            <li style="padding:7px;">
+                <a class="" Tabid="@up1.Tabid" style="text-decoration: none;color: #212529" href="@up1.PageName">
+                    <p>@up1.TabName </p>
+                </a>
+            </li>
+
+        }
+    }
+
+</ul>*@
+
+<div class="taskTabList" id="right_footer_tab">
+    <ul class="tabList">
+        <li class="active" Tabid="Files">Files</li>
+        <li Tabid="FileHistory">File History</li>
+        <li Tabid="Property">Property</li>
+        <li Tabid="Instructions">Instructions</li>
+    </ul>
+    <div class="tabBody">
+        <div id="Files" class="tabInner tabShow">Files</div>
+        <div id="FileHistory" class="tabInner">File History</div>
+        <div id="Property" class="tabInner">Property</div>
+        <div id="Instructions" class="tabInner">Instructions</div>
+    </div>
+</div>
+
+
+
+
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool expandSubNav;
+    private int ClickedMenu = 0;
+    private bool hasPageName = true;
+    private int prevMenuClickedMenu = 0;
+
+    public IEnumerable<FooterIndexInfo> footerlist;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        if (hasPageName)
+        {
+            collapseNavMenu = !collapseNavMenu;
+        }
+
+    }
+    public void GetIsClicked(MenuInfo mn)
+    {
+        ClickedMenu = mn.MenuId;
+        if (prevMenuClickedMenu != ClickedMenu)
+        {
+            expandSubNav = false;
+            if (mn.PageName != "" || mn.MenuName == "Home")
+            {
+                hasPageName = true;
+            }
+            else
+            {
+                expandSubNav = !expandSubNav;
+                hasPageName = false;
+            }
+        }
+        else
+        {
+            expandSubNav = !expandSubNav;
+        }
+        prevMenuClickedMenu = ClickedMenu;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        footerlist = await footerservice.GetFooterIndexInfos();
+    }
+}

@@ -40,10 +40,23 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="JS/WMSJS/jquery-3.6.0.min.js"></script>
-    <script src="JS/WMSJS/bootstrap.min.js"></script>
-    <script src="JS/WMSJS/taskScript.js"></script>
+
     <script src="_framework/blazor.webassembly.js"></script>
+    <!--<script src="JS/WMSJS/jquery-3.6.0.min.js"></script>
+    <script src="JS/WMSJS/bootstrap.min.js"></script>
+    <script src="JS/WMSJS/taskScript.js"></script>-->
+    <script type="blazor-boot">
+    </script>
+    <script type="text/javascript">
+        function closebuttonjs() {
+            //DotNet.invokeMethodAsync('WMS.Client', 'CSCallBackMethod');
+           document.getElementById("right_table").remove();
+          document.getElementById("right_footer_tab").remove();
+        }
+        function CSMethod() {
+          
+        }
+    </script>
 
 
 
